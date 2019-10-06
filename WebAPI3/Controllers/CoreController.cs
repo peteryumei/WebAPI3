@@ -77,6 +77,23 @@ namespace WebAPI3.Controllers
        
         }
 
+        [HttpGet("Table/{tablename}")]
+        public async Task<IEnumerable<Dictionary<string, object>>> GetTable(string tablename)
+        {
+
+            string conn = _configuration.GetSection("ConnectionStrings").GetSection("library").Value;
+            var sqlConnection = new SqlConnection(conn);
+            sqlConnection.Open();
+            string sql = "select * from " + tablename;
+            SqlCommand command = new SqlCommand(sql, sqlConnection);
+            var reader = command.ExecuteReader();
+            _logger.LogInformation("Table " + tablename + " is retrieved.");
+            return ConvertToDictionary(reader);
+
+            //return JsonConvert.SerializeObject(results);
+
+        }
+
         private IEnumerable<Dictionary<string, object>> ConvertToDictionary(SqlDataReader reader)
         {
             var columns = new List<string>();
