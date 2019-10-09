@@ -21,7 +21,11 @@ namespace WebAPI3
                .WriteTo.Console()
                .CreateLogger();
             try
-            { 
+            {
+                Log.Information("Info: Starting web host");
+                Log.Debug("Debug: Starting web host");
+                
+                
                 CreateHostBuilder(args).Build().Run();
             }
             catch (Exception ex)
@@ -39,8 +43,14 @@ namespace WebAPI3
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>()
-                    .UseSerilog();
-                });
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog((hostingCotext, loggerConfigration) => loggerConfigration
+                    .ReadFrom.Configuration(hostingCotext.Configuration)
+                    .Enrich.FromLogContext()
+                    .WriteTo.Debug()
+                    .WriteTo.File("c:\\temp\\WebAPI\\log.txt", rollingInterval: RollingInterval.Day)
+                    .WriteTo.Console(
+                         outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {NewLine}{Exception}"));
     }
 }

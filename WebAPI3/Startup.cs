@@ -41,7 +41,7 @@ namespace WebAPI3
                     //{
                     //    Name = "Peter Mei",
                     //    Email = string.Empty,
-                    //    Url = new Uri("https://twitter.com/spboyer"),
+                    //    Url = new Uri("https://twitter.com/peter"),
                     //},
                     //License = new OpenApiLicense
                     //{
@@ -54,7 +54,7 @@ namespace WebAPI3
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -72,7 +72,10 @@ namespace WebAPI3
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseSerilogRequestLogging();
+            //app.UseSerilogRequestLogging();
+
+            //loggerFactory.AddSerilog();
+            
 
             app.UseRouting();
 

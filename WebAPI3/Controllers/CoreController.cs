@@ -88,8 +88,8 @@ namespace WebAPI3.Controllers
             string sql = "select * from " + tablename;
             SqlCommand command = new SqlCommand(sql, sqlConnection);
             var reader = command.ExecuteReader();
-            _logger.LogInformation("Table " + tablename + " is retrieved.");
-            Log.Information("Table " + tablename + " is retrieved.");
+            //_logger.LogWarning("Table " + tablename + " is retrieved.");
+            Log.Warning("Table " + tablename + " is retrieved.");
             return ConvertToDictionary(reader);
 
             //return JsonConvert.SerializeObject(results);
