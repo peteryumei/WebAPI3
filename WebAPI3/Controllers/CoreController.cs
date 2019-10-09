@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace WebAPI3.Controllers
 {
@@ -88,6 +89,7 @@ namespace WebAPI3.Controllers
             SqlCommand command = new SqlCommand(sql, sqlConnection);
             var reader = command.ExecuteReader();
             _logger.LogInformation("Table " + tablename + " is retrieved.");
+            Log.Information("Table " + tablename + " is retrieved.");
             return ConvertToDictionary(reader);
 
             //return JsonConvert.SerializeObject(results);

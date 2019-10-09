@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using WebAPI3.Models;
 using Microsoft.OpenApi.Models;
+using Serilog;
 
 namespace WebAPI3
 {
@@ -71,6 +72,7 @@ namespace WebAPI3
                 c.RoutePrefix = string.Empty;
             });
 
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 
