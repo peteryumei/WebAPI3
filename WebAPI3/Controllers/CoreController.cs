@@ -67,7 +67,7 @@ namespace WebAPI3.Controllers
                 results.Add(new Book
                 {   Id = (int)reader["Id"], 
                     Title = reader["Title"].ToString(), 
-                    Author = reader["Title"].ToString() 
+                    Author = reader["Author"].ToString() 
                 });
             }
 
