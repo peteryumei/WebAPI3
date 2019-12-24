@@ -35,7 +35,7 @@ namespace WebAPI3.Controllers
         {
             var rng = new Random();
             _logger.LogDebug("Core is called");
-            return Enumerable.Range(1, 10).Select(index => new Weather
+            return Enumerable.Range(1, 3).Select(index => new Weather
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
